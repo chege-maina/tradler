@@ -42,7 +42,7 @@ class UserController extends Controller
 
             //Assign User Customers
 
-            $path = $user->role_id == 1 ? 'uploads/Customers-500K.csv' : 'uploads/Customers-100K.csv';
+            $path = $user->role_id == 1 ? 'uploads/Customers-10K.csv' : 'uploads/Customers-20K.csv';
             $chunks = array_chunk(file(public_path($path)), 2000);
             $header = [];
             $batch  = Bus::batch([])->dispatch();
