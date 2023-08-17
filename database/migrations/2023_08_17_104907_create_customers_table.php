@@ -14,6 +14,16 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+
+            $table->string('Index');
+            $table->string('User Id');
+            $table->string('First Name');
+            $table->string('Last Name');
+            $table->string('Sex');
+            $table->string('Email');
+            $table->string('Phone');
+            $table->string('Date of birth');
+            $table->string('Job Title');
         });
     }
 

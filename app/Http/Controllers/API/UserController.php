@@ -33,7 +33,7 @@ class UserController extends Controller
         $data = array_map('str_getcsv', file(public_path('uploads/Customers-100K.csv')));
         $header=$data[0];
         unset($data[0]);
-        return($data);
+        return($header);
         die();
 
         //Randomize password and Hash
