@@ -69,6 +69,13 @@ class UserController extends Controller
         ]);
     }
 
+    public function getUser($id)
+    {
+        return response()->json([
+            'user' => User::with('customers')->where('id', '=', $id)->orderBy('id')->get()
+        ]);
+    }
+
     public function deleteUser(Request $request, $id)
     {
         User::findOrfail($id)->delete();

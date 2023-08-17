@@ -114,14 +114,7 @@
                             class="p-3 text-xl text-[#002D74] whitespace-nowrap text-center"
                             data-bs-toggle="tooltip"
                             title="View"
-                            @click="
-                                toggleModal(), setHeading('Change Status');
-                                setStatus(
-                                    option.id,
-                                    option.status,
-                                    option.name
-                                );
-                            "
+                            @click="getCustomers(option.id)"
                         >
                             <i class="bi bi-eye-fill cursor-pointer"></i>
                         </td>
@@ -245,10 +238,7 @@
 
                     <div
                         class="text-[#002D74] text-xl px-1 cursor-pointer"
-                        @click="
-                            toggleModal(), setHeading('Change Status');
-                            setStatus(option.id, option.status, option.name);
-                        "
+                        @click="getCustomers(option.id)"
                     >
                         <i class="bi bi-eye-fill"></i>
                     </div>
@@ -292,36 +282,6 @@
                     type="submit"
                 >
                     Delete
-                </button>
-            </div>
-        </div>
-        <div class="my-8 px-4" v-else-if="heading === 'Change Status'">
-            <div class="grid grid-cols-1 gap-4">
-                <p>
-                    Are You Sure You Want To
-                    <span
-                        v-if="userstatus < 2"
-                        class="text-green-500 font-semibold"
-                    >
-                        Activate {{ modalData }}</span
-                    ><span v-else class="text-red-500 font-semibold">
-                        Deactivate {{ modalData }}</span
-                    >?
-                </p>
-            </div>
-            <div
-                class="sm:flex items-right justify-end m-2 border-t p-2 sm:space-x-2"
-            >
-                <button
-                    class="rounded-full text-white py-2 px-4 hover:scale-105 duration-300 mt-3 sm:mt-0 sm:w-auto w-full"
-                    @click="statusUsr"
-                    type="submit"
-                    :class="{
-                        'bg-red-500': userstatus > 1,
-                        'bg-green-500': userstatus < 2,
-                    }"
-                >
-                    Okay
                 </button>
             </div>
         </div>
@@ -593,6 +553,19 @@ export default {
                     });
             }
         };
+        const getCustomers = async (id) => {
+            console.log(id);
+            await axios
+                .get("/api/users/" + id)
+                .then((res) => {
+                    if (res.data.user) {
+                        console.log(res.data.user);
+                    }
+                })
+                .catch((e) => {
+                    error.value = e.response.data.message;
+                });
+        };
         return {
             SearchItem,
             options,
@@ -623,6 +596,7 @@ export default {
             setHeading,
             register,
             clearForm,
+            getCustomers,
             heading,
             form,
         };

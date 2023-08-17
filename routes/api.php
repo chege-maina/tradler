@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::controller(UserController::class)->group(function () {
-    Route::get('roles', 'listRoles');//Done
-    Route::get('users', 'listUsers');//Done
-    Route::post('users', 'createUser');//Done
+    Route::get('roles', 'listRoles');
+    Route::get('users', 'listUsers');
+    Route::post('users', 'createUser');
     Route::get('users/{id}', 'getUser');
-    Route::put('users/{id}', 'editUser');//Done
-    Route::delete('users/{id}', 'deleteUser');//Done
+    Route::put('users/{id}', 'editUser');
+    Route::delete('users/{id}', 'deleteUser');
 });
