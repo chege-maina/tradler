@@ -111,9 +111,9 @@
                             {{ option.roles.role }}
                         </td>
                         <td
-                            class="p-3 text-xl text-green-700 whitespace-nowrap text-center"
+                            class="p-3 text-xl text-[#002D74] whitespace-nowrap text-center"
                             data-bs-toggle="tooltip"
-                            title="Disable"
+                            title="View"
                             @click="
                                 toggleModal(), setHeading('Change Status');
                                 setStatus(
@@ -123,9 +123,7 @@
                                 );
                             "
                         >
-                            <i
-                                class="bi bi-check-circle-fill cursor-pointer"
-                            ></i>
+                            <i class="bi bi-eye-fill cursor-pointer"></i>
                         </td>
                         <td
                             class="p-3 text-[#002D74] text-xl whitespace-nowrap text-center"
@@ -246,13 +244,13 @@
                     </div>
 
                     <div
-                        class="text-green-500 text-xl px-1 cursor-pointer"
+                        class="text-[#002D74] text-xl px-1 cursor-pointer"
                         @click="
                             toggleModal(), setHeading('Change Status');
                             setStatus(option.id, option.status, option.name);
                         "
                     >
-                        <i class="bi bi-check-circle-fill"></i>
+                        <i class="bi bi-eye-fill"></i>
                     </div>
                     <div class="text-red-500 text-xl px-1 cursor-pointer">
                         <i
