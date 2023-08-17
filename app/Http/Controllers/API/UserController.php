@@ -13,8 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    //
-
+    
     public function createUser(Request $request)
     {
         // validation
@@ -40,22 +39,7 @@ class UserController extends Controller
 
             $user = User::create($input);
 
-            //Assign User Customers
-
-            $path = $user->role_id == 1 ? 'uploads/Customers-10K.csv' : 'uploads/Customers-20K.csv';
-            $chunks = array_chunk(file(public_path($path)), 2000);
-            $header = [];
-            $batch  = Bus::batch([])->dispatch();
-
-            foreach ($chunks as $key => $chunk) {
-                $data = array_map('str_getcsv', $chunk);
-
-                if ($key === 0) {
-                    $header = $data[0];
-                    unset($data[0]);
-                }
-                $batch->add(new CustomerCsvProcess($data, $header, $user));
-            }
+            $this->assignCustomers($user);
 
             $response = [
                 'success' => true,
@@ -124,7 +108,6 @@ class UserController extends Controller
         return response()->json($response, 200);
     }
 
-
     function generateRandomString($length = 10)
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -134,5 +117,24 @@ class UserController extends Controller
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    function assignCustomers($user)
+    {
+
+        $path = $user->role_id == 1 ? 'uploads/Customers-10K.csv' : 'uploads/Customers-20K.csv';
+        $chunks = array_chunk(file(public_path($path)), 2000);
+        $header = [];
+        $batch  = Bus::batch([])->dispatch();
+
+        foreach ($chunks as $key => $chunk) {
+            $data = array_map('str_getcsv', $chunk);
+
+            if ($key === 0) {
+                $header = $data[0];
+                unset($data[0]);
+            }
+            $batch->add(new CustomerCsvProcess($data, $header, $user));
+        }
     }
 }
