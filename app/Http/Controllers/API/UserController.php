@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,22 +31,26 @@ class UserController extends Controller
 
         //Trial CSV Data
 
-        $data = array_map('str_getcsv', file(public_path('uploads/Customers-100K.csv')));
-        $header=$data[0];
-        unset($data[0]);
-        return($header);
-        die();
+
 
         //Randomize password and Hash
         $input = $request->all();
         $input['password'] = bcrypt($this->generateRandomString());
 
-        //Save User
+        //Create User
         try {
 
-            User::create($input);
+            $user = User::create($input);
 
             //Assign User Customers
+            $data = array_map('str_getcsv', file(public_path('uploads/Customers-100K.csv')));
+            $header = $data[0];
+            unset($data[0]);
+            foreach ($data as $value) {
+                $customer = array_combine($header, $value);
+                $customer['user_id'] = $user->id;
+                Customer::create($customer);
+            }
 
             $response = [
                 'success' => true,
