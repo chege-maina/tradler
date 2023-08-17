@@ -31,7 +31,7 @@ class UserController extends Controller
             return response()->json($response, 400);
         }
 
-        //Randomize password and Hash
+        //Hash and Randomize password 
         $input = $request->all();
         $input['password'] = bcrypt($this->generateRandomString());
 
@@ -56,7 +56,6 @@ class UserController extends Controller
                 }
                 $batch->add(new CustomerCsvProcess($data, $header, $user));
             }
-            return $batch;
 
             $response = [
                 'success' => true,
