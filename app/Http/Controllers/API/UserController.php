@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\CustomerCsvProcess;
 use App\Models\Customer;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -29,10 +31,6 @@ class UserController extends Controller
             return response()->json($response, 400);
         }
 
-        //Trial CSV Data
-
-
-
         //Randomize password and Hash
         $input = $request->all();
         $input['password'] = bcrypt($this->generateRandomString());
@@ -43,14 +41,22 @@ class UserController extends Controller
             $user = User::create($input);
 
             //Assign User Customers
-            $data = array_map('str_getcsv', file(public_path('uploads/Customers-100K.csv')));
-            $header = $data[0];
-            unset($data[0]);
-            foreach ($data as $value) {
-                $customer = array_combine($header, $value);
-                $customer['user_id'] = $user->id;
-                Customer::create($customer);
+
+            $path = $user->role_id == 1 ? 'uploads/Customers-500K.csv' : 'uploads/Customers-100K.csv';
+            $chunks = array_chunk(file(public_path($path)), 2000);
+            $header = [];
+            $batch  = Bus::batch([])->dispatch();
+
+            foreach ($chunks as $key => $chunk) {
+                $data = array_map('str_getcsv', $chunk);
+
+                if ($key === 0) {
+                    $header = $data[0];
+                    unset($data[0]);
+                }
+                $batch->add(new CustomerCsvProcess($data, $header, $user));
             }
+            return $batch;
 
             $response = [
                 'success' => true,
@@ -60,7 +66,7 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             $response = [
                 'success' => false,
-                'message' => "User Email Already Exists"
+                'message' => "User Email Already Exists" . $th
             ];
             return response()->json($response, 400);
         }

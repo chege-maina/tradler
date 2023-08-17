@@ -6,6 +6,7 @@ fi
 
 php artisan migrate
 php artisan db:seed
+php artisan queue:work
 php artisan key:generate
 php artisan cache:clear
 php artisan config:clear
