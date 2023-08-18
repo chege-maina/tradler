@@ -35,6 +35,8 @@ class CustomerCsvProcess implements ShouldQueue
      */
     public function handle(): void
     {
+        sleep(10);
+        
         foreach ($this->data as $value) {
             $customer = array_combine($this->header, $value);
             $customer['user_id'] = $this->user->id;

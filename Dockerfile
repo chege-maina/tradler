@@ -17,16 +17,7 @@ ENV PORT=8000
 
 RUN chmod o+w /var/www/Docker
 
-ENTRYPOINT [ "/var/www/Docker/entrypoint.sh" ]
+ENTRYPOINT [ "bash", "/var/www/Docker/entrypoint.sh" ]
 
 # ==============================================================================
 #  node
-FROM node:14-alpine as node
-
-WORKDIR /var/www
-COPY . .
-
-RUN npm install --global cross-env
-RUN npm install
-
-VOLUME /var/www/node_modules
