@@ -19,11 +19,15 @@ List of technologies which are used in this project.
 
 ### Setup Environment for Development:
 
--   Copy `.env.example` to `.env`.
--   Set up the database and redis settings in the `.env` file.
+-   Clone and cd into the project folder.
+-   Run `composer install`.
+-   Copy `.env.example` to `.env` Run `cp .env.example .env`in Linux or Mac or `copy .env.example .env` Windows.
+-   Generate key `php artisan key:generate`
+-   Run `npm install`.
+-   Set `QUEUE_CONNECTION=redis` in the `.env` file.
 -   Set up the App, database and redis settings in the `.env` file.
 -   Run `docker-compose up -d` for development purpose.
--   Generate key `docker exec bakend-end php artisan key:generate`
+
 -   Install npm package then run `docker exec tradler-app npm install`.
 -   Install compose package then run `docker exec tradler-app compose install`.
 -   Install compose package then run `docker exec tradler-app php artisan migrate`.
