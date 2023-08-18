@@ -30,10 +30,11 @@ List of technologies which are used in this project.
 
 -   You need to have an AWS account and a Laravel Vapor account.
 -   Link the Vapor account to AWS account.
--   In this project folder open terminal and type composer require laravel/vapor-cli.
--   Open favourite browser and type `http://localhost`. If you wan to run on different port, you can change the `HTTP_PORT` from `.env` file.
--   If you want to install a npm package then run `docker exec front-end npm install <Package_Name>`.
--   If you want to install compose package then run `docker exec back-end compose install <PACKAGE_NAME>`.
+-   In this project folder open terminal and type `composer require laravel/vapor-cli` to add vapor CLI
+-   Type `php vendor/bin/vapor login` on the terminal to login to your vapor account and provide the password.
+-   Create a project in the vapor account and a database.
+-   For deploying, edit the `vapor.yml` file in this project folder to have the details in your Vapor project.
+-   To deploy, type `php vendor/bin/vapor deploy production` in the project folder to deploy to the production environment.
 
 ## About
 
