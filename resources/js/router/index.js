@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Login from "../components/pages/Users.vue";
+import Dashboard from "../components/pages/Dashboard.vue";
 
 const routes = [
     {
-        name: "Users",
+        name: "Dashboard",
         path: "/",
-        component: Login,
+        component: Dashboard,
         meta: {
             requiresAuth: false,
         },

@@ -345,11 +345,13 @@
 </template>
 
 <script>
-import Modal from "../../components/includes/Modal.vue";
+import Modal from "../includes/Modal.vue";
 import { ref, onMounted, reactive } from "vue";
+import { useStore } from "vuex";
 export default {
     components: { Modal },
     setup() {
+        const store = useStore();
         const modalActive = ref(false);
         const buttonsActive = ref(true);
         const heading = ref();
@@ -554,17 +556,8 @@ export default {
             }
         };
         const getCustomers = async (id) => {
-            console.log(id);
-            await axios
-                .get("/api/users/" + id)
-                .then((res) => {
-                    if (res.data.user) {
-                        console.log(res.data.user);
-                    }
-                })
-                .catch((e) => {
-                    error.value = e.response.data.message;
-                });
+            store.dispatch("dashMenus", "customers");
+            store.dispatch("setVideo", id);
         };
         return {
             SearchItem,

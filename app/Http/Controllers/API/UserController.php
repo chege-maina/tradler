@@ -129,10 +129,9 @@ class UserController extends Controller
     function assignCustomers($user)
     {
 
-        $path = $user->role_id == 1 ? 'uploads/Customers-10K.csv' : 'uploads/Customers-20K.csv';
-        $chunks = array_chunk(file(public_path($path)), 2000);
+        $path = $user->role_id == 1 ? 'Customers-10K.csv' : 'Customers-20K.csv';
+        $chunks = array_chunk(file("https://vapor-us-east-1-assets-1692180033.s3.amazonaws.com/".$path), 10);
         $header = [];
-        $batch  = Bus::batch([])->dispatch();
 
         foreach ($chunks as $key => $chunk) {
             $data = array_map('str_getcsv', $chunk);
@@ -141,7 +140,7 @@ class UserController extends Controller
                 $header = $data[0];
                 unset($data[0]);
             }
-            $batch->add(new CustomerCsvProcess($data, $header, $user));
+            CustomerCsvProcess::dispatch($data, $header, $user);
         }
     }
 }
