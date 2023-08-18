@@ -28,9 +28,9 @@ List of technologies which are used in this project.
 
 ### Deploying on Laravel Vapor:
 
--   Copy `.env.example` to `.env`.
--   Change the necessary staff in `.env` file.
--   Run `docker-compose -f docker-compose.production.yml up` for production.
+-   You need to have an AWS account and a Laravel Vapor account.
+-   Link the Vapor account to AWS account.
+-   In this project folder open terminal and type composer require laravel/vapor-cli.
 -   Open favourite browser and type `http://localhost`. If you wan to run on different port, you can change the `HTTP_PORT` from `.env` file.
 -   If you want to install a npm package then run `docker exec front-end npm install <Package_Name>`.
 -   If you want to install compose package then run `docker exec back-end compose install <PACKAGE_NAME>`.
