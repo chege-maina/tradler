@@ -20,11 +20,15 @@ List of technologies which are used in this project.
 ### Setup Environment for Development:
 
 -   Copy `.env.example` to `.env`.
+-   Set up the database and redis settings in the `.env` file.
+-   Set up the App, database and redis settings in the `.env` file.
 -   Run `docker-compose up -d` for development purpose.
--   Open favourite browser and type `http://localhost`. If you wan to run on different port, you can change the `HTTP_PORT` from `.env` file.
 -   Generate key `docker exec bakend-end php artisan key:generate`
--   If you want to install a npm package then run `docker exec front-end npm install <Package_Name>`.
--   If you want to install compose package then run `docker exec back-end compose install <PACKAGE_NAME>`.
+-   Install npm package then run `docker exec tradler-app npm install`.
+-   Install compose package then run `docker exec tradler-app compose install`.
+-   Install compose package then run `docker exec tradler-app php artisan migrate`.
+-   Install compose package then run `docker exec tradler-app php artisan db:seed`.
+-   Install compose package then run `docker exec tradler-app php artisan queue:work`.
 
 ### Deploying on Laravel Vapor:
 
