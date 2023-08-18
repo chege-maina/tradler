@@ -19,5 +19,3 @@ RUN chmod o+w /var/www/Docker
 
 ENTRYPOINT [ "bash", "/var/www/Docker/entrypoint.sh" ]
 
-# ==============================================================================
-#  node
