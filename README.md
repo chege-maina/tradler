@@ -19,7 +19,7 @@ List of technologies which are used in this project.
 
 ### Setup Environment for Development:
 
-- Clone this repository `git clone git@github.com:sadhakbj/Laravel-8-vue3-typescript.git`
+- Clone this repository `git clone git@github.com:chege-maina/tradler.git`
 - After clone, cd into the project folder `cd tradler`.
 - Make sure you have docker installed on your local machine, you do not need to have php / mysql / redis / node installed on your machine
 - Copy `.env` file: `cp .env.example .env`in Linux and Mac or `copy .env.example .env` Windows.
