@@ -19,20 +19,21 @@ List of technologies which are used in this project.
 
 ### Setup Environment for Development:
 
--   Clone and cd into the project folder.
--   Run `composer install`.
--   Copy `.env.example` to `.env` Run `cp .env.example .env`in Linux or Mac or `copy .env.example .env` Windows.
--   Generate key `php artisan key:generate`
--   Run `npm install`.
--   Set `QUEUE_CONNECTION=redis` in the `.env` file.
--   Set up the App, database and redis settings in the `.env` file.
--   Run `docker-compose up -d` for development purpose.
-
--   Install npm package then run `docker exec tradler-app npm install`.
--   Install compose package then run `docker exec tradler-app compose install`.
--   Install compose package then run `docker exec tradler-app php artisan migrate`.
--   Install compose package then run `docker exec tradler-app php artisan db:seed`.
--   Install compose package then run `docker exec tradler-app php artisan queue:work`.
+- Clone this repository `git clone git@github.com:sadhakbj/Laravel-8-vue3-typescript.git`
+- After clone, cd into the project folder `cd tradler`.
+- Make sure you have docker installed on your local machine, you do not need to have php / mysql / redis / node installed on your machine
+- Copy `.env` file: `cp .env.example .env`in Linux and Mac or `copy .env.example .env` Windows.
+- Set the environment variables in `.env` file
+- Run command: `docker-compose up --build -d`
+-  Run the container in bash mode: `docker exec -it Tradler_php /bin/sh`
+- Inside this container now you can run all the commands as if if you are on local environment:
+- Install composer dependencies: `composer install`
+- Generate key: `php artisan key:generate`
+- Run migration: `php artisan migrate`
+- Run seeder: `php artisan db:seed`
+- Install javascript dependencies: `npm install`
+- Compile the assets: `npm run dev`  
+- You can access the project at: `http://localhost:8000`
 
 ### Deploying on Laravel Vapor:
 

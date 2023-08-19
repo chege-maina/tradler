@@ -1,21 +1,13 @@
-FROM php:8.2 as php
+FROM php:8.2-fpm-alpine
 
-RUN apt-get update -y
-RUN apt-get install -y unzip libpq-dev libcurl4-gnutls-dev
-RUN docker-php-ext-install pdo pdo_mysql bcmath
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN pecl install -o -f redis \
-    && rm -rf /tmp/pear \
-    && docker-php-ext-enable redis
+RUN set -ex \
+    	&& apk --no-cache add mysql-dev nodejs npm libzip-dev zip \
+    	&& docker-php-ext-install pdo pdo_mysql zip
 
-WORKDIR /var/www
+WORKDIR /var/www/html
+
 COPY . .
 
-COPY --from=composer:2.3.5 /usr/bin/composer /usr/bin/composer
-
-ENV PORT=8000
-
-RUN chmod o+w /var/www/Docker
-
-ENTRYPOINT [ "bash", "/var/www/Docker/entrypoint.sh" ]
-
+RUN chmod o+w /var/www
