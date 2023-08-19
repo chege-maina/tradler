@@ -40,7 +40,7 @@ services:
 
   ## MySQL Docker Compose Config
   tradler-db:
-    container_name: ${APP_NAME}_mysql-db
+    container_name: ${APP_NAME}_mysql
     image: mysql:8.0
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
@@ -48,7 +48,7 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - db-data:/var/lib/mysql
+      - ./docker/mysql:/var/lib/mysql
     expose:
       - "3306"
     ports:

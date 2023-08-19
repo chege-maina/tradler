@@ -32,7 +32,7 @@ List of technologies which are used in this project.
 - Run migration: `php artisan migrate`
 - Run seeder: `php artisan db:seed`
 - Install javascript dependencies: `npm install`
-- Compile the assets: `npm run dev`  
+- Compile the assets: `npm run build`  
 - You can access the project at: `http://localhost:8000`
 
 ### Deploying on Laravel Vapor:
