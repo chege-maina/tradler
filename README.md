@@ -56,7 +56,7 @@ I have reduced the files to a total of 30 customers for admin and 80 customers f
 
 ## Usage 
 
-Click on Add User button to create a new user, fill in the form in the pop-up modal selecting the role and providing an email and name for the user. Click Save button and the data is sent to the backend for processing. Click on view customer eye icon on the table for the new user and a list of customers will be shown. 
+Click on Add User button to create a new user, fill in the form in the pop-up modal selecting the role and providing an email and name for the user. Click Save button and the data is sent to the backend for processing. Click on view customer eye icon on the table for the new user and a list of customers will be shown. User on the Nav takes you to the users list.
 If the jobs are still processing in the background, the total number of users are increasing, just refresh the page to test. Click on edit from the table to edit user details and delete also on the table to delete a user. Each user on the table list can be edited, deleted and also view customers for the customer. The data is persisted in a MySQL database.
 
 
