@@ -27,6 +27,7 @@ List of technologies which are used in this project.
 - Run command: `docker-compose up --build -d`
 -  Run the container in bash mode: `docker exec -it Tradler_php /bin/sh`
 - Inside this container now you can run all the commands as if if you are on local environment:
+- Run: `chown -R www-data:www-data *`
 - Install composer dependencies: `composer install`
 - Generate key: `php artisan key:generate`
 - Run migration: `php artisan migrate`
