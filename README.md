@@ -34,6 +34,7 @@ List of technologies which are used in this project.
 - Run seeder: `php artisan db:seed`
 - Install javascript dependencies: `npm install`
 - Compile the assets: `npm run build`  
+- To run the queue run: `php artisan queue:work`  
 - You can access the project at: `http://localhost:8000`
 
 ### Deploying on Laravel Vapor:
