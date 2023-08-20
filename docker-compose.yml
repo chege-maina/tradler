@@ -38,6 +38,19 @@ services:
     networks:
       - webapp
 
+  tradler-queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ${APP_NAME}_queue
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - tradler-php
+    networks:
+      - webapp
+    command: ["php", "artisan", "queue:work"]
+
   ## MySQL Docker Compose Config
   tradler-db:
     container_name: ${APP_NAME}_mysql
